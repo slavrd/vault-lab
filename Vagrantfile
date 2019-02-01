@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :shell, :path => "scripts/provision.sh"
+  config.vm.provision :shell, :path => "scripts/python_setup.sh"
   config.vm.provision :shell, :path => "scripts/vault_setup.sh", run: "always"
   
   config.vm.define "vault01" do |l1|
