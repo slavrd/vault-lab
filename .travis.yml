@@ -4,5 +4,7 @@ sudo: required
 install:
   - scripts/provision.sh travis
   - scripts/vault_setup.sh travis
+before_script:
+  - source ~/.bash_profile
 script:
   - tests/test_basic_config.sh
