@@ -1,5 +1,8 @@
 language: generic
 dist: xenial
 sudo: required
+install:
+  - scripts/provision.sh $USER
+  - scripts/vault_setup.sh $USER
 script:
-  - exit 0
+  - tests/test_basic_config.sh
