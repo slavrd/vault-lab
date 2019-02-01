@@ -43,9 +43,9 @@ cat ~/.vault-token
 echo -e "\nvault token is on /root/.vault-token"
 
 grep VAULT_TOKEN ~/.bash_profile || {
-  echo export VAULT_TOKEN=\`cat /root/.vault-token\` | sudo tee -a ~/.bash_profile
+  echo export VAULT_TOKEN=\`sudo cat ~/.vault-token\` | sudo tee -a ~/.bash_profile
 }
 
 grep VAULT_TOKEN /home/$V_USR/.bash_profile || {
-  echo export VAULT_TOKEN=\`sudo cat /root/.vault-token\` | sudo tee -a /home/$V_USR/.bash_profile
+  echo export VAULT_TOKEN=\`sudo cat ~/.vault-token\` | sudo tee -a /home/$V_USR/.bash_profile
 }
