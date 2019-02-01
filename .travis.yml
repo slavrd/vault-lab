@@ -8,6 +8,5 @@ install:
 before_script:
   - source ~/.bash_profile
 script:
-  - echo Current user is $USER
   - tests/test_basic_config.sh
   - tests/test_python_config.sh
