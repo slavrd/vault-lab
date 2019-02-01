@@ -15,7 +15,7 @@ fi
 sudo killall vault &>/dev/null
 
 # delete old token if present
-[ -f /root/.vault-token ] && sudo rm /root/.vault-token
+[ -f ~/.vault-token ] && sudo rm ~/.vault-token
 
 # start vault
 /usr/local/bin/vault server  -dev -dev-listen-address=0.0.0.0:8200  &> ${LOG} &
@@ -40,7 +40,7 @@ grep VAULT_ADDR /home/$V_USR/.bash_profile || {
 # set VAULT_TOKEN
 echo "vault token:"
 cat ~/.vault-token
-echo -e "\nvault token is on /root/.vault-token"
+echo -e "\nvault token is on $HOME/.vault-token"
 
 grep VAULT_TOKEN ~/.bash_profile || {
   echo export VAULT_TOKEN=\`sudo cat ~/.vault-token\` | sudo tee -a ~/.bash_profile
