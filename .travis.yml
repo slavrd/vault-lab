@@ -1,5 +1,10 @@
 language: generic
 dist: xenial
 sudo: required
+install:
+  - scripts/provision.sh travis
+  - scripts/vault_setup.sh travis
+before_script:
+  - source ~/.bash_profile
 script:
-  - exit 0
+  - tests/test_basic_config.sh
