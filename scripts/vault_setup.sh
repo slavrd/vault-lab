@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # start and setup Vault
 
+[ "$1" == "" ] && V_USR="vagrant" || V_USR="$1"
+
 # set vault log destination
 if [ -d /vagrant ]; then
   [ -d /vagrant/logs ] || mkdir /vagrant/logs
@@ -21,29 +23,29 @@ echo vault started
 sleep 3 
 
 # make sure the current token is used
-export VAULT_TOKEN="`sudo cat /root/.vault-token`"
+export VAULT_TOKEN="`sudo cat ~/.vault-token`"
 
 # set vault address 
 export VAULT_ADDR="http://127.0.0.1:8200"
 
-# set VAULT_ADDR for root and vagrant users
+# set VAULT_ADDR for root and other users
 grep VAULT_ADDR ~/.bash_profile || {
   echo export VAULT_ADDR=http://127.0.0.1:8200 | sudo tee -a ~/.bash_profile
 }
 
-grep VAULT_ADDR /home/vagrant/.bash_profile || {
-  echo export VAULT_ADDR=http://127.0.0.1:8200 | sudo tee -a /home/vagrant/.bash_profile
+grep VAULT_ADDR /home/$V_USR/.bash_profile || {
+  echo export VAULT_ADDR=http://127.0.0.1:8200 | sudo tee -a /home/$V_USR/.bash_profile
 }
 
-# set VAULT_TOKEN for root and vagrant users
+# set VAULT_TOKEN
 echo "vault token:"
-cat /root/.vault-token
+cat ~/.vault-token
 echo -e "\nvault token is on /root/.vault-token"
 
 grep VAULT_TOKEN ~/.bash_profile || {
   echo export VAULT_TOKEN=\`cat /root/.vault-token\` | sudo tee -a ~/.bash_profile
 }
 
-grep VAULT_TOKEN /home/vagrant/.bash_profile || {
-  echo export VAULT_TOKEN=\`sudo cat /root/.vault-token\` | sudo tee -a /home/vagrant/.bash_profile
+grep VAULT_TOKEN /home/$V_USR/.bash_profile || {
+  echo export VAULT_TOKEN=\`sudo cat /root/.vault-token\` | sudo tee -a /home/$V_USR/.bash_profile
 }

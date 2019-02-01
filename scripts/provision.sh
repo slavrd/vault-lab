@@ -2,13 +2,14 @@
 # Install needed software and basic configs
 
 VAULT=0.11.4
+[ "$1" == "" ] && V_USR="vagrant" || V_USR="$1"
 
 # install
 PKG="wget unzip curl jq"
 which ${PKG} &>/dev/null || {
   export DEBIAN_FRONTEND=noninteractive
-  apt-get update
-  apt-get install -y ${PKG}
+  sudo apt-get update
+  sudo apt-get install -y ${PKG}
 }
 
 # check vault binary
@@ -27,8 +28,8 @@ grep '\.bashrc' ~/.bash_profile &>/dev/null || \
 echo -e "\nif [ -f ~/.bashrc ]; then\n\tsource ~/.bashrc\nfi" | \
 sudo tee -a ~/.bash_profile
 
-grep '\.bashrc' /vagrant/home/.bash_profile &>/dev/null || \
+grep '\.bashrc' /$V_USR/home/.bash_profile &>/dev/null || \
 echo -e "\nif [ -f ~/.bashrc ]; then\n\tsource ~/.bashrc\nfi" | \
-sudo tee -a /home/vagrant/.bash_profile
+sudo tee -a /home/$V_USR/.bash_profile
 
-sudo chown vagrant /home/vagrant/.bash_profile
+sudo chown $V_USR /home/$V_USR/.bash_profile
