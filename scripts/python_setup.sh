@@ -4,10 +4,8 @@
 [ "$1" == "" ] && V_USR="vagrant" || V_USR="$1"
 
 # install pip
-which pip3 || {
-    sudo apt-get update
-    sudo apt-get install -y python3-virtualenv python3-pip
-}
+sudo apt-get update
+sudo apt-get install -y python3-virtualenv python3-pip
 
 # install pipenv for specified user
 sudo su -c "pip3 install --user pipenv" $V_USR
