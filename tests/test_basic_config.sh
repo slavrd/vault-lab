@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Tests if the machine is configured
+# Tests if the machine configuration
 ERR=0
 
 # Test settings in .bash_profile
