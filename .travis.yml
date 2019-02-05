@@ -7,6 +7,8 @@ install:
   - scripts/vault_setup.sh travis
 before_script:
   - source ~/.bash_profile
+  - pushd python-client; pipenv install; popd
 script:
   - tests/test_basic_config.sh
   - tests/test_python_config.sh
+  - pushd python-client/tests; pipenv python3 test_vault_com_kv.py; popd
