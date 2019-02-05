@@ -11,4 +11,4 @@ before_script:
 script:
   - tests/test_basic_config.sh
   - tests/test_python_config.sh
-  - pushd python-client/tests; pipenv python3 test_vault_com_kv.py; popd
+  - pushd python-client/tests; pipenv run python3 test_vault_com_kv.py; popd
