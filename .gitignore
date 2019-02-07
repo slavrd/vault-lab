@@ -1,2 +1,5 @@
 .vagrant/
 logs/
+.DS_Store
+Pipfile.lock
+.vscode/
