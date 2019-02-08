@@ -5,11 +5,11 @@ VAULT=0.11.4
 [ "$1" == "" ] && V_USR="vagrant" || V_USR="$1"
 
 # install
-PKG="wget unzip curl jq"
+PKG="wget unzip curl jq sshpass"
 which ${PKG} &>/dev/null || {
   export DEBIAN_FRONTEND=noninteractive
-  sudo apt-get update
-  sudo apt-get install -y ${PKG}
+  sudo apt-get update >> /dev/null
+  sudo apt-get install -y ${PKG} >> /dev/null
 }
 
 # check vault binary
@@ -18,7 +18,7 @@ which vault &>/dev/null || {
   [ -f vault_${VAULT}_linux_amd64.zip ] || {
     sudo wget -q https://releases.hashicorp.com/vault/${VAULT}/vault_${VAULT}_linux_amd64.zip
   }
-  sudo unzip vault_${VAULT}_linux_amd64.zip
+  sudo unzip vault_${VAULT}_linux_amd64.zip >> /dev/null
   sudo chmod +x vault
   popd
 }
