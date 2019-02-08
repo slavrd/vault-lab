@@ -2,15 +2,26 @@ language: generic
 dist: xenial
 sudo: required
 install:
-  - scripts/provision.sh travis
-  - scripts/python_setup.sh travis
-  - scripts/vault_setup.sh travis
+- scripts/provision.sh travis
+- scripts/python_setup.sh travis
+- scripts/vault_setup.sh travis
 before_script:
-  - source ~/.bash_profile
-  - pushd python-client; pipenv install; popd
+- source ~/.bash_profile
+- pushd python-client; pipenv install; popd
 script:
-  - tests/test_basic_config.sh
-  - tests/test_python_config.sh
-  - pushd python-client/tests; pipenv run python3 test_vault_com_kv.py
-  - pipenv run python3 test_ui.py
-  - popd
+- tests/test_basic_config.sh
+- tests/test_python_config.sh
+- pushd python-client/tests; pipenv run python3 test_vault_com_kv.py
+- pipenv run python3 test_ui.py
+- popd
+before_deploy:
+- bash prep_python_release.sh
+deploy:
+  provider: releases
+  on:
+    repo: slavrd/vault-lab
+    tags: true
+  file: vault-python-client.zip
+  skip_cleanup: true
+  api_key:
+    secure: Y89Dbo23eeNjnnVlJUVookoOQ5qEWNk6V0xXi+5FMq8Y9lFtPfHlL8Xdnpj5SCtT+lU5pt6PjKPOjPpfFSHQl/RUdywWiDLDSmAjeTtWDGopvxQvXuH8Vw+qM12Rw03ptTEPuZCeumX1xgxYT3VI+mAmDHlCdggz27np6FCgEUyEc94tbdvBn9b3zpNfenontL/Fc/d8Kzk0HJY6kO+Yv480+MN4QsYBe1+huKkOZ3G3MsSbAAzLyIvOQzLIq2EFRR696MbNdOiW5tx/KYd0tQfggxtJyv+0Mz6CfB9J8tiETK71PpWcYbB3gN/KOnYrGH7HTJ0fTYJ2v+IbRdBtjp/N9CuXljaKlc5VhFnyQ3Me6skh8BkW+BOry88cfsXuJfalWLFxSOfil0eHxl8jxdcaY7l3peqe9u/d5qQggbYKWumVLvhYGUSBJPHW9lI8TBUyq5oezeD61xE9LBAKX2wpd5TEMhMl3khMhg4WcAZiHrWK9abaVlo6xEbXHnmDhmQb2aKix2ydUMW503IAgTRA2jMWzNRRNWpqMTieeS8Ki3ksyEGkFFbqqN6YvfE2kKhUrqt/8TkzBaQUNCNnHr3vyfiQ08q1f3WWmqs4M1lsYPWyDPcgEczxHjEbO+gG6RmBEhJ6mfn4G2ooJnSvGt1JPJ9GzMoDzdFT1Ax8sAM=
