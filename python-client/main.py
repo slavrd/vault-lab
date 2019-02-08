@@ -66,7 +66,7 @@ class UI:
         Vault error response in resp
         """
         try:
-            err_list=list(json.loads(resp.content)["errors"])
+            err_list=resp.json()['errors']
             for msg in err_list:
                 print(msg,file=sys.stderr)
         except ValueError:
@@ -122,7 +122,7 @@ class UI:
             return None
         elif resp.ok:
             try:
-                secret_content = dict(json.loads(resp.content)["data"]["data"])
+                secret_content = resp.json()["data"]["data"]
             except ValueError:
                 print("Error: Vault response could not be parsed",file=sys.stderr)
                 return None
@@ -162,7 +162,7 @@ class UI:
             print("Error calling vault API.",file=sys.stderr)
         elif resp.ok:
             try:
-                data = json.loads(resp.content)["data"]["keys"]
+                data = resp.json()['data']['keys']
                 for item in data:
                     print(item)
             except ValueError:
