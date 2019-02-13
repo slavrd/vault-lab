@@ -3,3 +3,5 @@ logs/
 .DS_Store
 Pipfile.lock
 .vscode/
+obj/
+bin/
