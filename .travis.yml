@@ -15,6 +15,7 @@ script:
 - pushd python-client/tests; pipenv run python3 test_vault_com_kv.py
 - pipenv run python3 test_ui.py
 - popd
+- dotnet test dotnet-client/VaultKVCom.Tests/VaultKVCom.Tests.csproj
 before_deploy:
 - bash scripts/prep_python_release.sh
 deploy:
