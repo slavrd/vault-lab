@@ -28,7 +28,6 @@ namespace VaultKVCom
             // prepare request body
             ReqAddSecret secData = new ReqAddSecret(secretData);
             StringContent content = new StringContent(JsonConvert.SerializeObject(secData,jsonConvertSettings),Encoding.UTF8,"application/json");
-            // content.Headers.Add("X-Vault-Token",VaultToken);
 
             // execute request
             HttpResponseMessage result = new HttpResponseMessage();
@@ -59,7 +58,6 @@ namespace VaultKVCom
         /// Returns the keyvalue pair in the provided secret data as dictionary.
         /// Reterns null on network error
         ///</summary>
-        /* 
         public Dictionary<string, string> GetKVSecret(string secret)
         {
             // Handle empty argument
@@ -73,9 +71,7 @@ namespace VaultKVCom
             try
             {   
                 HttpRequestMessage req = new HttpRequestMessage();
-                req.Method = HttpMethod.Get;
-                req.Headers.Add("X-Vault-Token",VaultToken);
-                response = webClient.SendAsync(Url.Combine(KVBaseAPI,"data",secret),).Result;
+                response = webClient.GetAsync(Url.Combine(KVBaseAPI,"data",secret)).Result;
             }
             catch(HttpRequestException e)
             {
@@ -91,12 +87,13 @@ namespace VaultKVCom
             }
             else
             {
-                var secretData = JsonConvert.DeserializeObject<RespReadSecret>(response.Content.ToString());
+                var respString = response.Content.ReadAsStringAsync().Result;
+                var secretData = JsonConvert.DeserializeObject<RespReadSecret>(respString);
                 return secretData.data["data"];
             }
             
         }
-        */
+
         public bool DeleteKVSecret(string secret)
         {
             throw new NotImplementedException();
