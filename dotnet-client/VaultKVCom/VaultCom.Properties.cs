@@ -44,7 +44,11 @@ namespace VaultKVCom
             {
                 this.webClient = webClient;
             }
+
+            // Add authorization vault Authorization header
+            this.webClient.DefaultRequestHeaders.Add("X-Vault-Token",this.VaultToken);
             
+            // Basic json converter settings to use when needed
             jsonConvertSettings = new JsonSerializerSettings
             {
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore

@@ -28,7 +28,7 @@ namespace VaultKVCom
             // prepare request body
             ReqAddSecret secData = new ReqAddSecret(secretData);
             StringContent content = new StringContent(JsonConvert.SerializeObject(secData,jsonConvertSettings),Encoding.UTF8,"application/json");
-            content.Headers.Add("X-Vault-Token",VaultToken);
+            // content.Headers.Add("X-Vault-Token",VaultToken);
 
             // execute request
             HttpResponseMessage result = new HttpResponseMessage();
@@ -55,6 +55,58 @@ namespace VaultKVCom
             }
         }
     
+        ///<summary>
+        /// Returns the keyvalue pair in the provided secret data as dictionary.
+        /// Reterns null on network error
+        ///</summary>
+        /* 
+        public Dictionary<string, string> GetKVSecret(string secret)
+        {
+            // Handle empty argument
+            if(String.IsNullOrEmpty(secret))
+            {
+                throw new ArgumentNullException("The secret string is empty or null");
+            }
+
+            // call Vault API
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {   
+                HttpRequestMessage req = new HttpRequestMessage();
+                req.Method = HttpMethod.Get;
+                req.Headers.Add("X-Vault-Token",VaultToken);
+                response = webClient.SendAsync(Url.Combine(KVBaseAPI,"data",secret),).Result;
+            }
+            catch(HttpRequestException e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return null;
+            }
+            
+            // Handle Response
+            if(!response.IsSuccessStatusCode)
+            {
+                Console.Error.WriteLine($"{(int)response.StatusCode}: {response.ReasonPhrase}");
+                return null;
+            }
+            else
+            {
+                var secretData = JsonConvert.DeserializeObject<RespReadSecret>(response.Content.ToString());
+                return secretData.data["data"];
+            }
+            
+        }
+        */
+        public bool DeleteKVSecret(string secret)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> ListKVSecrets()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 
 }
