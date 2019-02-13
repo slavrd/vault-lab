@@ -69,8 +69,8 @@ namespace VaultKVCom.Tests
                 ItExpr.Is<HttpRequestMessage>( req =>
                     req.Method == HttpMethod.Post 
                     && req.RequestUri == expectedUri 
-                    && req.Content.Headers.Contains("X-Vault-Token")
-                    && new List<string>(req.Content.Headers.GetValues("X-Vault-Token")).Contains("vault_token")
+                    && req.Headers.Contains("X-Vault-Token")
+                    && new List<string>(req.Headers.GetValues("X-Vault-Token")).Contains("vault_token")
                     ),
                 ItExpr.IsAny<CancellationToken>()
             );
