@@ -26,6 +26,10 @@ namespace VaultKVCom.Tests
 
         }
 
+        ///<summary>
+        /// Creates a Moq.Mock of HttpRequestMessage to use with HttpClient
+        /// The Mock Returns HttpResponseMessage with StatusCode set to provided code.
+        ///</summary>
         private Mock<HttpMessageHandler> NewMoqHttpHandler(HttpStatusCode code) {
             // Define a Mock to use with the httpclient
             var moqHandler = new Mock<HttpMessageHandler>(MockBehavior.Strict);
@@ -47,6 +51,7 @@ namespace VaultKVCom.Tests
 
             return moqHandler;
         }
+
         [Fact]
         public void TestSuccess_AddKVSecret()
         {
