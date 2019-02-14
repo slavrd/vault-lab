@@ -83,7 +83,7 @@ namespace VaultKVCom.Tests
         }
     
         [Fact]
-        public async void TestFailure_AssKVSecret()
+        public async void TestFailure_AddKVSecret()
         {
             var moqHandler = NewMoqHttpHandler(HttpStatusCode.BadRequest);
 
