@@ -74,6 +74,20 @@ namespace VaultKVCom.Tests
             Assert.NotNull(callResult);
             Assert.Equal(expectedKVSecret,callResult);
 
+            // Verify HttpClient.GetAsync() call
+            Uri expReqUrl = new Uri("http://test.com/v1/vault_path/data/test-secret");
+            moqHandler.Protected().Verify(
+                "SendAsync",
+                Times.Once(),
+                ItExpr.Is<HttpRequestMessage>( req =>
+                    req.Method == HttpMethod.Get
+                    && req.RequestUri == expReqUrl
+                    && req.Headers.Contains("X-Vault-Token")
+                    && new List<string>(req.Headers.GetValues("X-Vault-Token")).Contains("vault_token")
+                ),
+                ItExpr.IsAny<CancellationToken>()
+            );
+
         }
 
         [Fact]
