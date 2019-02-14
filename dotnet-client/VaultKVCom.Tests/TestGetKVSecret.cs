@@ -61,14 +61,14 @@ namespace VaultKVCom.Tests
         /// Test GetKVSecret() with a successfull response form Vault API
         ///</summary>
 
-        public void TestSuccess_GetKVSecret()
+        public async void TestSuccess_GetKVSecret()
         {
             var moqHandler = NewMoqHttpHandler(HttpStatusCode.OK);
 
             // Make the method call
             var httpClient = new HttpClient(moqHandler.Object);
             VaultCom vcom = new VaultCom("http://test.com","vault_token","vault_path", httpClient);
-            var callResult = vcom.GetKVSecret("test-secret");
+            var callResult = await vcom.GetKVSecret("test-secret");
 
             // Verify returned result
             Assert.NotNull(callResult);
@@ -81,14 +81,14 @@ namespace VaultKVCom.Tests
         /// Test GetKVSecret() with a failure response form Vault API
         ///</summary>
 
-        public void TestFailure_GetKVSecret()
+        public async void TestFailure_GetKVSecret()
         {
             var moqHandler = NewMoqHttpHandler(HttpStatusCode.BadRequest);
 
             // Make the method call
             var httpClient = new HttpClient(moqHandler.Object);
             VaultCom vcom = new VaultCom("http://test.com","vault_token","vault_path", httpClient);
-            var callResult = vcom.GetKVSecret("test-secret");
+            var callResult = await vcom.GetKVSecret("test-secret");
 
             // Verify returned result
             Assert.Null(callResult);

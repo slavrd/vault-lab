@@ -17,7 +17,7 @@ namespace VaultKVCom
         /// Create or update Vault KV secret with secertData.
         /// Returns bool to indicate success.
         ///</summary>
-        public bool AddKVSecret(string secret, Dictionary<string, string> secretData)
+        public async Task<bool> AddKVSecret(string secret, Dictionary<string, string> secretData)
         {
             // Check for Null argument
             if(secret == null)
@@ -33,7 +33,7 @@ namespace VaultKVCom
             HttpResponseMessage result = new HttpResponseMessage();
             try
             {
-                result = webClient.PostAsync(Url.Combine(KVBaseAPI,"data",secret),content).Result;
+                result = await webClient.PostAsync(Url.Combine(KVBaseAPI,"data",secret),content);
             }
             catch(HttpRequestException e)
             {
@@ -58,7 +58,7 @@ namespace VaultKVCom
         /// Returns the keyvalue pair in the provided secret data as dictionary.
         /// Reterns null on network error
         ///</summary>
-        public Dictionary<string, string> GetKVSecret(string secret)
+        public async Task<Dictionary<string, string>> GetKVSecret(string secret)
         {
             // Handle empty argument
             if(String.IsNullOrEmpty(secret))
@@ -71,7 +71,7 @@ namespace VaultKVCom
             try
             {   
                 HttpRequestMessage req = new HttpRequestMessage();
-                response = webClient.GetAsync(Url.Combine(KVBaseAPI,"data",secret)).Result;
+                response = await webClient.GetAsync(Url.Combine(KVBaseAPI,"data",secret));
             }
             catch(HttpRequestException e)
             {

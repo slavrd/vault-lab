@@ -53,14 +53,14 @@ namespace VaultKVCom.Tests
         }
 
         [Fact]
-        public void TestSuccess_AddKVSecret()
+        public async void TestSuccess_AddKVSecret()
         {
             var moqHandler = NewMoqHttpHandler(HttpStatusCode.OK);
 
             // Make the method call
             var httpClient = new HttpClient(moqHandler.Object);
             VaultCom vcom = new VaultCom("http://test.com","vault_token","vault_path", httpClient);
-            bool callResult = vcom.AddKVSecret("test-secret",correctSecretData);      
+            bool callResult = await vcom.AddKVSecret("test-secret",correctSecretData);      
 
             // Verify returned result
             Assert.IsType<bool>(callResult);
@@ -83,14 +83,14 @@ namespace VaultKVCom.Tests
         }
     
         [Fact]
-        public void TestFailure_AssKVSecret()
+        public async void TestFailure_AssKVSecret()
         {
             var moqHandler = NewMoqHttpHandler(HttpStatusCode.BadRequest);
 
             // Make the method call
             var httpClient = new HttpClient(moqHandler.Object);
             VaultCom vcom = new VaultCom("http://test.com","vault_token","vault_path", httpClient);
-            bool callResult = vcom.AddKVSecret("test-secret",correctSecretData);      
+            bool callResult = await vcom.AddKVSecret("test-secret",correctSecretData);      
 
             // Verify returned result
             Assert.IsType<bool>(callResult);
