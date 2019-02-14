@@ -87,7 +87,7 @@ namespace VaultKVCom
             }
             else
             {
-                var respString = response.Content.ReadAsStringAsync().Result;
+                var respString = await response.Content.ReadAsStringAsync();
                 var secretData = JsonConvert.DeserializeObject<RespReadSecret>(respString);
                 return secretData.data["data"];
             }
@@ -131,9 +131,41 @@ namespace VaultKVCom
 
         }
 
-        public List<string> ListKVSecrets()
+        ///<summary>
+        /// Lists the provided secret from Vault
+        /// Returns null on failure
+        ///</summary>
+        public async Task<List<string>> ListKVSecrets()
         {
-            throw new NotImplementedException();
+
+            // Call the vault API
+            HttpResponseMessage response = new HttpResponseMessage();
+            HttpRequestMessage req = new HttpRequestMessage
+            {
+                Method = new HttpMethod("LIST"),
+                RequestUri = new Uri(Url.Combine(KVBaseAPI,"metadata"))
+            };
+            try
+            {
+                response = await webClient.SendAsync(req);
+            }
+            catch(HttpRequestException e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return null;
+            }
+
+            // Handle response
+            if(!response.IsSuccessStatusCode)
+            {
+                Console.Error.WriteLine($"{(int)response.StatusCode}: {response.ReasonPhrase}");
+                return null;
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<RespListSecrets>(await response.Content.ReadAsStringAsync()).data["keys"];
+            }
+
         }
 
     }

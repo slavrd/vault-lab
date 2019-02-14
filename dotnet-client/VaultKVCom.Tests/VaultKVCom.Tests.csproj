@@ -14,5 +14,8 @@
     <Content Include=".\sampleGetKVSecretResp.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include=".\sampleListKVSecretsResp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
