@@ -94,9 +94,41 @@ namespace VaultKVCom
             
         }
 
-        public bool DeleteKVSecret(string secret)
+        ///<summary>
+        /// Deletes the provided secret from Vault
+        /// Returns bool to indicate success
+        ///</summary>
+        public async Task<bool> DeleteKVSecret(string secret)
         {
-            throw new NotImplementedException();
+            // Handle empty argument
+            if(String.IsNullOrEmpty(secret))
+            {
+                throw new ArgumentNullException("The secret string is empty or null");
+            }
+
+            // call Vault API
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                response = await webClient.DeleteAsync(Url.Combine(KVBaseAPI,"metadata",secret));
+            }
+            catch(HttpRequestException e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return false;
+            }
+
+            // Handle response
+            if(!response.IsSuccessStatusCode)
+            {
+                Console.Error.WriteLine($"{(int)response.StatusCode}: {response.ReasonPhrase}");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         public List<string> ListKVSecrets()
