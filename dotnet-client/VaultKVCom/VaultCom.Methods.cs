@@ -14,7 +14,7 @@ namespace VaultKVCom
     {
         
         ///<summary>
-        /// Create or update Vault KV secret with secertData.
+        /// Create or update Vault KV secret with seceretData.
         /// Returns bool to indicate success.
         ///</summary>
         public async Task<bool> AddKVSecret(string secret, Dictionary<string, string> secretData)
