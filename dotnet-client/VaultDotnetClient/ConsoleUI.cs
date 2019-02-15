@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using VaultKVCom;
 using System.Collections.Generic;
+using Flurl;
 
 namespace VaultDotnetClient
 {
@@ -129,7 +130,74 @@ namespace VaultDotnetClient
         ///</summary>
         internal void AddSecret()
         {
-            throw new NotImplementedException();
+            // Gather user input
+            Console.WriteLine();
+
+                // Get secret name
+            string secretName = null;
+            while(String.IsNullOrEmpty(secretName) || !Uri.IsWellFormedUriString(secretName,UriKind.Relative))             
+            {
+                Console.Write("Enter secret name: ");
+                secretName = Console.ReadLine().Trim('/');
+            }
+            Console.WriteLine();
+
+                // Get number of KV pairs in the secret
+            uint kvNum = 0;
+            while(kvNum <= 0)
+            {
+                Console.Write("Enter number of KV pairs: ");
+                uint.TryParse(Console.ReadLine(),out kvNum);
+            }
+                
+                // Get the KV pairs
+            var secretData = new Dictionary<string,string>();
+
+            for(uint i = 1; i <= kvNum; i++)
+            {   
+
+                Console.WriteLine();
+
+                string key = String.Empty;
+                string value = String.Empty;
+
+                // Get key, ensuring it does not exist
+                while(String.IsNullOrEmpty(key))
+                {
+                    Console.Write("Enter key{0}: ",i);
+                    key = Console.ReadLine();
+                    if(secretData.ContainsKey(key))
+                    {
+                        Console.Error.WriteLine("Key already exists!");
+                        key = string.Empty;
+                    }
+                }
+                Console.WriteLine();
+                
+                // Get Vaule
+                while(String.IsNullOrEmpty(value))
+                {
+                    Console.Write("Enter value{0}: ",i);
+                    value = Console.ReadLine();
+                }
+                
+                secretData.Add(key,value);
+            }
+
+            // Call vault API and handle response
+            Console.WriteLine();
+            if(vaultCommunicator.AddKVSecret(secretName,secretData).Result)
+            {
+                Console.WriteLine("Secret written successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Writing secret failed!");
+            }
+
+            Console.Write("Press any key to continue...");
+            Console.ReadLine();
+
         }
     
         ///<summary>
