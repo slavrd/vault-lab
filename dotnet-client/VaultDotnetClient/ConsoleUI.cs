@@ -161,7 +161,7 @@ namespace VaultDotnetClient
         ///</summary>
         internal void Exit()
         {
-            throw new NotImplementedException();
+            Environment.Exit(0);
         }
 
     }
