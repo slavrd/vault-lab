@@ -121,7 +121,7 @@ namespace VaultDotnetClient
                     Exit();
                     break;
                 default:
-                    throw new ApplicationException(String.Format("The menu action {0} is not implemented",choice));
+                    throw new ApplicationException(String.Format("The menu action {0} is not implemented!",choice));
             };
         }
     
@@ -217,7 +217,7 @@ namespace VaultDotnetClient
         }
 
         ///<summary>
-        /// Lest all secrets available
+        /// List all available secrets
         ///</summary>
         internal void ListSecrets()
         {
