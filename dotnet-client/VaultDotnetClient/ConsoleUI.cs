@@ -3,6 +3,7 @@ using System.ComponentModel;
 using VaultKVCom;
 using System.Collections.Generic;
 using Flurl;
+using VaultDotnetClient.Interfaces;
 
 namespace VaultDotnetClient
 {
@@ -23,16 +24,21 @@ namespace VaultDotnetClient
             {"vault-token","VAULT_TOKEN"},
             {"vault-kv-path","VAULT_KV_PATH"}
         };
-
+        
         private VaultCom vaultCommunicator;
 
+        private IUserInput userInput; 
+       
         public ConsoleUI()
         {
             vaultCommunicator = InitVaultCom();
             if(vaultCommunicator == null)
             {               
-                throw new ApplicationException("Error initializing vault communicator");
+                throw new ApplicationException("Error initializing vault communicator!");
             } 
+
+            this.userInput = new GetUserInput();
+
         }
 
         ///<summary>
@@ -93,7 +99,7 @@ namespace VaultDotnetClient
                 Console.Write("Enter your choice: ");
                 
                 // Get user input, validate and assign to choice if valid
-                ushort.TryParse(Console.ReadLine(),out choice);
+                ushort.TryParse(userInput.GetUserInput(),out choice);
             }
             return (menuItems)Enum.ToObject(typeof(menuItems),choice);
         }
@@ -138,7 +144,7 @@ namespace VaultDotnetClient
             while(String.IsNullOrEmpty(secretName) || !Uri.IsWellFormedUriString(secretName,UriKind.Relative))             
             {
                 Console.Write("Enter secret name: ");
-                secretName = Console.ReadLine().Trim('/');
+                secretName = userInput.GetUserInput().Trim('/');
             }
             Console.WriteLine();
 
@@ -147,7 +153,7 @@ namespace VaultDotnetClient
             while(kvNum <= 0)
             {
                 Console.Write("Enter number of KV pairs: ");
-                uint.TryParse(Console.ReadLine(),out kvNum);
+                uint.TryParse(userInput.GetUserInput(),out kvNum);
             }
                 
                 // Get the KV pairs
@@ -165,7 +171,7 @@ namespace VaultDotnetClient
                 while(String.IsNullOrEmpty(key))
                 {
                     Console.Write("Enter key{0}: ",i);
-                    key = Console.ReadLine();
+                    key = userInput.GetUserInput();
                     if(secretData.ContainsKey(key))
                     {
                         Console.Error.WriteLine("Key already exists!");
@@ -178,7 +184,7 @@ namespace VaultDotnetClient
                 while(String.IsNullOrEmpty(value))
                 {
                     Console.Write("Enter value{0}: ",i);
-                    value = Console.ReadLine();
+                    value = userInput.GetUserInput();
                 }
                 
                 secretData.Add(key,value);
@@ -196,7 +202,7 @@ namespace VaultDotnetClient
             }
 
             Console.Write("Press any key to continue...");
-            Console.ReadLine();
+            userInput.GetUserInput();
 
         }
     
