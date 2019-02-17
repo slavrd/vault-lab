@@ -17,7 +17,7 @@ namespace VaultKVCom
         /// Create or update Vault KV secret with seceretData.
         /// Returns bool to indicate success.
         ///</summary>
-        public async Task<bool> AddKVSecret(string secret, Dictionary<string, string> secretData)
+        public virtual async Task<bool> AddKVSecret(string secret, Dictionary<string, string> secretData)
         {
             // Check for Null argument
             if(secret == null)
@@ -58,7 +58,7 @@ namespace VaultKVCom
         /// Returns the keyvalue pair in the provided secret data as dictionary.
         /// Reterns null on network error
         ///</summary>
-        public async Task<Dictionary<string, string>> GetKVSecret(string secret)
+        public virtual async Task<Dictionary<string, string>> GetKVSecret(string secret)
         {
             // Handle empty argument
             if(String.IsNullOrEmpty(secret))
@@ -98,7 +98,7 @@ namespace VaultKVCom
         /// Deletes the provided secret from Vault
         /// Returns bool to indicate success
         ///</summary>
-        public async Task<bool> DeleteKVSecret(string secret)
+        public virtual async Task<bool> DeleteKVSecret(string secret)
         {
             // Handle empty argument
             if(String.IsNullOrEmpty(secret))
@@ -135,7 +135,7 @@ namespace VaultKVCom
         /// Lists the provided secret from Vault
         /// Returns null on failure
         ///</summary>
-        public async Task<List<string>> ListKVSecrets()
+        public virtual async Task<List<string>> ListKVSecrets()
         {
 
             // Call the vault API
