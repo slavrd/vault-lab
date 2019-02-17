@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using VaultDotnetClient;
 using VaultKVCom;
 using Moq;
 
@@ -9,7 +8,8 @@ namespace VaultDotnetClient.Tests
     public class TestDisplayMenu
     {
         /// <summary>
-        /// Verify only acceptable user choices are taken
+        /// Verify only acceptable user choices are taken and
+        /// the the matching ConsoleUI.MainMenu enum is returned.
         /// </summary>
 
         [Fact]
