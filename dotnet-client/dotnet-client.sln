@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultKVCom", "VaultKVCom\VaultKVCom.csproj", "{5F904E61-2224-461D-8A74-7CF27588D0C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultKVCom", "VaultKVCom\VaultKVCom.csproj", "{5F904E61-2224-461D-8A74-7CF27588D0C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultKVCom.Tests", "VaultKVCom.Tests\VaultKVCom.Tests.csproj", "{80A1D023-F956-49BC-8031-6C684790C0E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultKVCom.Tests", "VaultKVCom.Tests\VaultKVCom.Tests.csproj", "{80A1D023-F956-49BC-8031-6C684790C0E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultDotnetClient", "VaultDotnetClient\VaultDotnetClient.csproj", "{D74F5AA0-A053-4B91-A1FF-7B2254F1700C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultDotnetClient", "VaultDotnetClient\VaultDotnetClient.csproj", "{D74F5AA0-A053-4B91-A1FF-7B2254F1700C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultDotnetClient.Tests", "VaultDotnetClient.Tests\VaultDotnetClient.Tests.csproj", "{1CE4732E-37C9-406B-8C89-5024037839D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F904E61-2224-461D-8A74-7CF27588D0C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +57,23 @@ Global
 		{D74F5AA0-A053-4B91-A1FF-7B2254F1700C}.Release|x64.Build.0 = Release|Any CPU
 		{D74F5AA0-A053-4B91-A1FF-7B2254F1700C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D74F5AA0-A053-4B91-A1FF-7B2254F1700C}.Release|x86.Build.0 = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|x64.Build.0 = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Debug|x86.Build.0 = Debug|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|x64.Build.0 = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CE4732E-37C9-406B-8C89-5024037839D1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09DA84B1-CDF3-44E0-B818-2841FBE670E5}
 	EndGlobalSection
 EndGlobal
