@@ -45,12 +45,12 @@ namespace VaultDotnetClient
         }
 
         /// <summary>
-        /// Constructor that assignes a provided VaultCom object to vaultCommunicator
+        /// Constructor that uses the provided VaultCom and IUserInput objects.
         /// </summary>
         /// <param name="vaultComunicator"></param>
-        public ConsoleUI(VaultCom vaultComunicator)
+        public ConsoleUI(VaultCom vaultComunicator,IUserInput userInput)
         {
-            this.userInput = new GetUserInput();
+            this.userInput = userInput;
             this.vaultCommunicator = vaultComunicator;
         }
 
