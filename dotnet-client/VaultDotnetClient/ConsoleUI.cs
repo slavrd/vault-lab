@@ -9,7 +9,7 @@ namespace VaultDotnetClient
 {
     public class ConsoleUI
     {
-        internal enum menuItems: ushort
+        internal enum MenuItems: ushort
         {
             AddUpdateSecret=1,
             ReadSecret,
@@ -27,18 +27,31 @@ namespace VaultDotnetClient
         
         private VaultCom vaultCommunicator;
 
-        private IUserInput userInput; 
-       
+        private IUserInput userInput;
+
+
+        /// <summary>
+        /// Constructor that initializes new VaultCom instance for vaultCommunicator
+        /// </summary>
         public ConsoleUI()
         {
-            vaultCommunicator = InitVaultCom();
-            if(vaultCommunicator == null)
+            VaultCom vaultCom = InitVaultCom();
+            if(vaultCom == null)
             {               
                 throw new ApplicationException("Error initializing vault communicator!");
-            } 
-
+            }
             this.userInput = new GetUserInput();
 
+        }
+
+        /// <summary>
+        /// Constructor that assignes a provided VaultCom object to vaultCommunicator
+        /// </summary>
+        /// <param name="vaultComunicator"></param>
+        public ConsoleUI(VaultCom vaultComunicator)
+        {
+            this.userInput = new GetUserInput();
+            this.vaultCommunicator = vaultComunicator;
         }
 
         ///<summary>
@@ -79,19 +92,19 @@ namespace VaultDotnetClient
         /// Displays menu based on the class menuItems and
         /// returns the user choice
         ///</summary>
-        internal menuItems DisplayMenu()
+        internal MenuItems DisplayMenu()
         {
             ushort choice = 0;
             
             // Redisplay main menu until the user makes a valid choice
-            while(!Enum.IsDefined(typeof(menuItems),choice))
+            while(!Enum.IsDefined(typeof(MenuItems),choice))
             {
                 Console.Clear();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("=========\n");
                 
                 // Display all available choices based on this.menuItems
-                foreach(var item in Enum.GetValues(typeof(menuItems)))
+                foreach(var item in Enum.GetValues(typeof(MenuItems)))
                 {
                     Console.WriteLine("{0}) {1}", (ushort)item,item);
                 }
@@ -101,29 +114,29 @@ namespace VaultDotnetClient
                 // Get user input, validate and assign to choice if valid
                 ushort.TryParse(userInput.GetUserInput(),out choice);
             }
-            return (menuItems)Enum.ToObject(typeof(menuItems),choice);
+            return (MenuItems)Enum.ToObject(typeof(MenuItems),choice);
         }
     
         ///<summary>
         /// Executes appropriate action for provided menuItem choice
         ///</summary>
-        internal void ExecuteAction(menuItems choice)
+        internal void ExecuteAction(MenuItems choice)
         {
             switch(choice)
             {
-                case menuItems.AddUpdateSecret:
+                case MenuItems.AddUpdateSecret:
                     AddSecret();
                     break;
-                case menuItems.ReadSecret:
+                case MenuItems.ReadSecret:
                     ReadSecret();
                     break;
-                case menuItems.DeleteSecret:
+                case MenuItems.DeleteSecret:
                     DeleteSecret();
                     break;
-                case menuItems.ListAllSecrets:
+                case MenuItems.ListAllSecrets:
                     ListSecrets();
                     break;
-                case menuItems.Exit:
+                case MenuItems.Exit:
                     Exit();
                     break;
                 default:
