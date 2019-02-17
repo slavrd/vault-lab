@@ -9,7 +9,7 @@ namespace VaultDotnetClient
 {
     public class ConsoleUI
     {
-        internal enum MenuItems: ushort
+        public enum MenuItems: ushort
         {
             AddUpdateSecret=1,
             ReadSecret,
@@ -92,7 +92,7 @@ namespace VaultDotnetClient
         /// Displays menu based on the class menuItems and
         /// returns the user choice
         ///</summary>
-        internal MenuItems DisplayMenu()
+        public MenuItems DisplayMenu()
         {
             ushort choice = 0;
             
@@ -120,7 +120,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// Executes appropriate action for provided menuItem choice
         ///</summary>
-        internal void ExecuteAction(MenuItems choice)
+        public void ExecuteAction(MenuItems choice)
         {
             switch(choice)
             {
@@ -147,7 +147,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// Adds or updates secret based on user input
         ///</summary>
-        internal void AddSecret()
+        public void AddSecret()
         {
             // Gather user input
             Console.WriteLine();
@@ -222,7 +222,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// Read a user provided secret
         ///</summary>
-        internal void ReadSecret()
+        public void ReadSecret()
         {
             throw new NotImplementedException();
         }
@@ -230,7 +230,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// Delete a user provided secret
         ///</summary>
-        internal void DeleteSecret()
+        public void DeleteSecret()
         {
             throw new NotImplementedException();
         }
@@ -238,7 +238,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// List all available secrets
         ///</summary>
-        internal void ListSecrets()
+        public void ListSecrets()
         {
             throw new NotImplementedException();
         }
@@ -246,7 +246,7 @@ namespace VaultDotnetClient
         ///<summary>
         /// Exits the program
         ///</summary>
-        internal void Exit()
+        public void Exit()
         {
             Environment.Exit(0);
         }
