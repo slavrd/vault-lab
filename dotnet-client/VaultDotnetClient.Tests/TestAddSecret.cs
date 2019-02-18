@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace VaultDotnetClient.Tests
 {
     /// <summary>
-    /// Tests for ConsoleUI.AddKVSecret()
+    /// Tests for ConsoleUI.AddSecret()
     /// </summary>
     public class TestAddSecret
     {
@@ -41,7 +41,7 @@ namespace VaultDotnetClient.Tests
                 }
             );
 
-            // define expected secret data dictionary based on iput
+            // define expected secret data dictionary based on input
             Dictionary<string, string> expSecretData = new Dictionary<string, string>
             {
                 { "key1","value1" },
@@ -64,7 +64,7 @@ namespace VaultDotnetClient.Tests
                 .ReturnsAsync(true)
                 .Verifiable();
 
-            // Invoke ConsoleUI.AddKVSecret()
+            // Invoke ConsoleUI.AddSecret()
             ConsoleUI testConsoleUI = new ConsoleUI(mockVaultCom.Object, testInput);
             testConsoleUI.AddSecret();
 
