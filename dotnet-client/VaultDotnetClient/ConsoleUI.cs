@@ -238,7 +238,7 @@ namespace VaultDotnetClient
             }
             
             Console.Write("\nPress any key to continue...");
-            Console.ReadLine();
+            userInput.GetUserInput();
         
         }
 
@@ -248,7 +248,22 @@ namespace VaultDotnetClient
         public void DeleteSecret()
         {
 
-            throw new NotImplementedException();
+            // Get secret name
+            Console.WriteLine();
+            string secretName = GetSecretName();
+
+            // Call Vault API and handle output
+            if(vaultCommunicator.DeleteKVSecret(secretName).Result)
+            {
+                Console.WriteLine("Secret deleted successfully if present.");
+            }
+            else
+            {
+                Console.Error.WriteLine("Error deleteing the secret!");
+            }
+            Console.WriteLine("\nPress any key to continue...");
+            userInput.GetUserInput();
+
         }
 
         ///<summary>

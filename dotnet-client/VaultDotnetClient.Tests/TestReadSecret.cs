@@ -16,7 +16,7 @@ namespace VaultDotnetClient.Tests
         /// Test the API call to VaultCom.GetKVSecret() 
         /// </summary>
         [Fact]
-        public void TestGetSecretSuccess()
+        public void TestReadSecretSuccess()
         {
 
         // Setup user input
@@ -27,6 +27,7 @@ namespace VaultDotnetClient.Tests
                     "/",
                     "my/secret",
                     "my-secret",
+                    ""
                 }
             );
 
