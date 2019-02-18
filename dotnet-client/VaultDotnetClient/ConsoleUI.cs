@@ -218,12 +218,21 @@ namespace VaultDotnetClient
         ///</summary>
         public void ReadSecret()
         {
-            throw new NotImplementedException();
+
             // Get secret name
+            string secretName = GetSecretName();
 
             // Make call to Vault API
+            Dictionary<string,string> secretData = vaultCommunicator.GetKVSecret(secretName).Result;
 
             // Handle output
+            if(secretData != null)
+            {
+                foreach(KeyValuePair<string,string> kv in secretData)
+                {
+                    Console.WriteLine($"{kv.Key} = {kv.Value}");                }
+            }
+        
         }
 
         ///<summary>
