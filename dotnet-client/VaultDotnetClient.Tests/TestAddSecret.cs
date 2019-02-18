@@ -9,7 +9,7 @@ namespace VaultDotnetClient.Tests
     /// <summary>
     /// Tests for ConsoleUI.AddKVSecret()
     /// </summary>
-    public class TestAddKVSecret
+    public class TestAddSecret
     {
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace VaultDotnetClient.Tests
         /// and the call to VaultCom.AddKVSecret()
         /// </summary>
         [Fact]
-        public void TestAddKVSecretSuccess()
+        public void TestAddSecretSuccess()
         {
             // Setup user input
             Helpers.MockUserInput testInput = new Helpers.MockUserInput(
