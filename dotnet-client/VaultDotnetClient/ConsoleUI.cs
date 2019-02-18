@@ -153,13 +153,7 @@ namespace VaultDotnetClient
             Console.WriteLine();
 
                 // Get secret name
-            string secretName = null;
-            while(String.IsNullOrEmpty(secretName) || !Uri.IsWellFormedUriString(secretName,UriKind.Relative))             
-            {
-                Console.Write("Enter secret name: ");
-                secretName = userInput.GetUserInput().Trim('/');
-            }
-            Console.WriteLine();
+            string secretName = GetSecretName();
 
                 // Get number of KV pairs in the secret
             uint kvNum = 0;
@@ -225,6 +219,11 @@ namespace VaultDotnetClient
         public void ReadSecret()
         {
             throw new NotImplementedException();
+            // Get secret name
+
+            // Make call to Vault API
+
+            // Handle output
         }
 
         ///<summary>
@@ -232,6 +231,7 @@ namespace VaultDotnetClient
         ///</summary>
         public void DeleteSecret()
         {
+
             throw new NotImplementedException();
         }
 
@@ -249,6 +249,22 @@ namespace VaultDotnetClient
         public void Exit()
         {
             Environment.Exit(0);
+        }
+
+
+        /// <summary>
+        /// Get a secret name from the user
+        /// </summary>
+        private string GetSecretName()
+        {
+            string secretName = null;
+            while(String.IsNullOrEmpty(secretName) || !Uri.IsWellFormedUriString(secretName,UriKind.Relative) || secretName.Contains('/'))             
+            {
+                Console.Write("Enter secret name: ");
+                secretName = userInput.GetUserInput().Trim('/');
+            }
+            Console.WriteLine();
+            return secretName;
         }
 
     }
