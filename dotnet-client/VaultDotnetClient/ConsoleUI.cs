@@ -271,7 +271,27 @@ namespace VaultDotnetClient
         ///</summary>
         public void ListSecrets()
         {
-            throw new NotImplementedException();
+
+            Console.WriteLine();
+
+            // Call Vault API
+            List<string> secretsList = vaultCommunicator.ListKVSecrets().Result;
+
+            // Handle output
+            if(secretsList != null)
+            {
+                foreach(string item in secretsList)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine("Failed getting secrets!");
+            }
+            Console.WriteLine("\nPress any key to continue...");
+            userInput.GetUserInput();
+
         }
 
         ///<summary>
