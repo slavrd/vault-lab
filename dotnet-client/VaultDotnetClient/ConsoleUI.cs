@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 using VaultKVCom;
 using System.Collections.Generic;
-using Flurl;
 using VaultDotnetClient.Interfaces;
 
 namespace VaultDotnetClient
@@ -35,8 +33,8 @@ namespace VaultDotnetClient
         /// </summary>
         public ConsoleUI()
         {
-            VaultCom vaultCom = InitVaultCom();
-            if(vaultCom == null)
+            vaultCommunicator = InitVaultCom();
+            if(vaultCommunicator == null)
             {               
                 throw new ApplicationException("Error initializing vault communicator!");
             }
@@ -220,6 +218,7 @@ namespace VaultDotnetClient
         {
 
             // Get secret name
+            Console.WriteLine();
             string secretName = GetSecretName();
 
             // Make call to Vault API
@@ -230,8 +229,16 @@ namespace VaultDotnetClient
             {
                 foreach(KeyValuePair<string,string> kv in secretData)
                 {
-                    Console.WriteLine($"{kv.Key} = {kv.Value}");                }
+                    Console.WriteLine($"{kv.Key} = {kv.Value}");                
+                }
             }
+            else
+            {
+                Console.Error.WriteLine("Getting secret failed!");
+            }
+            
+            Console.Write("\nPress any key to continue...");
+            Console.ReadLine();
         
         }
 
