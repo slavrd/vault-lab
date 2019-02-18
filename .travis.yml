@@ -4,6 +4,7 @@ sudo: required
 install:
 - scripts/provision.sh travis
 - scripts/python_setup.sh travis
+- scripts/dotnet_setup.sh
 - scripts/vault_setup.sh travis
 before_script:
 - source ~/.bash_profile
@@ -14,6 +15,7 @@ script:
 - pushd python-client/tests; pipenv run python3 test_vault_com_kv.py
 - pipenv run python3 test_ui.py
 - popd
+- dotnet test dotnet-client/dotnet-client.sln
 before_deploy:
 - bash scripts/prep_python_release.sh
 deploy:
