@@ -132,7 +132,7 @@ namespace VaultKVCom
         }
 
         ///<summary>
-        /// Lists the provided secret from Vault
+        /// Lists all secrets on the current Vault path - this.VaultKVPath
         /// Returns null on failure
         ///</summary>
         public virtual async Task<List<string>> ListKVSecrets()
