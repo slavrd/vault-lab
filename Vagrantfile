@@ -31,7 +31,13 @@ Vagrant.configure("2") do |config|
 
     c1.vm.provision :shell, :path => "scripts/python_setup.sh"
     c1.vm.provision :shell, :path => "scripts/dotnet_setup.sh"
-    c1.vm.provision :shell, :path => "scripts/install_python_client.sh"   
+
+    # install the vault clients' latest versions
+    clients = Array.[]("vault-python-client","vault-dotnet-client")
+    clients.each do |client|
+      c1.vm.provision :shell, :path => "scripts/install_vault_client.sh", :args => [client]
+    end
+    
     c1.vm.provision "shell" do |p1|
       p1.path = "scripts/config_vault_client.sh"
       p1.args = [vault_server_ip]
