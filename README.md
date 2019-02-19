@@ -2,7 +2,7 @@
 
 A Vagrant project that builds two VMs. One with Vault installed and running in dev mode. Another to use with Vault clients.
 
-The repository includes also a python Vault client for basic interaction with Vault's KV secrets engine.
+The repository includes also several clients for basic interaction with Vault's KV secrets engine.
 
 ## Prerequisites
 
@@ -42,13 +42,18 @@ The project also includes a bash script that simulates a basic application that 
 
 ## Vagrant client machine
 
-The repository includes a python client for the Vault KV secrets engine in the `python-client` folder. The vagrant project will create a second VM called client01 with the latest version of the client installed on it.
+The repository includes a python and dotnet clients in folders `python-client` and `dotnet-client`. The vagrant project will create a second VM called client01 with the latest version of the clients installed on it.
 
-The client reads its Vault access configuration from the environment variables - `VAULT_TOKEN`,`VAULT_ADDR`,`VAULT_KV_PATH`. They are preset for the vagrant user.
+The clients read their Vault access configuration from the environment variables - `VAULT_TOKEN`,`VAULT_ADDR`,`VAULT_KV_PATH`. They are preset for the vagrant user so that the clients can connect to the `vault01` VM.
 
 * Login to the client VM - `vagrant ssh client01`
 
 ### Using the Python client
 
-* Change to the client directory - `cd vault-python-client`
+* Change to the client directory - `cd ~/vault-python-client`
 * Start the client = `pipenv run python3 main.py`
+
+### Using the Dotnet client
+
+* Change to the client directory - `cd ~/vault-dotnet-client`
+* Start the client = `dotnet VaultDotnetClient.dll`
