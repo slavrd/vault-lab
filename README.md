@@ -51,7 +51,8 @@ The clients read their Vault access configuration from the environment variables
 ### Using the Python client
 
 * Change to the client directory - `cd ~/vault-python-client`
-* Start the client = `pipenv run python3 main.py`
+* Install project dependencies - `pipenv install`
+* Start the client - `pipenv run python3 main.py`
 
 ### Using the Dotnet client
 
