@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install needed software and basic configs
 
-VAULT=0.11.4
+VAULT=1.1.3
 [ "$1" == "" ] && V_USR="vagrant" || V_USR="$1"
 
 # install
